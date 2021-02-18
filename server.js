@@ -11,13 +11,28 @@ const {
 } = require("./src/errorHandlers");
 const mongoose = require("mongoose");
 const cors = require("cors");
+const oauth = require("./src/auth/oauth"); //import so that the google strategy can be used by passport, but it isn't called any where
+
 
 //INITIAL SETUP
 const server = express();
 const port = process.env.PORT || 3006
 
 //MIDDLEWARES
-server.use(cors());
+
+const whitelist = [`${process.env.FE_URL}`]; //whose allowed, which can be an array of strings
+const corsOptions = {
+  origin: (origin, callback) => {
+    if (whitelist.indexOf(origin) !== -1 || !origin) {
+      callback(null, true);
+    } else {
+      callback(new Error("Not allowed by CORS"));
+    }
+  },
+  credentials: true, //credentials=cookies, and letting cors know that cookies are allowed
+};
+
+server.use(cors(corsOptions)); //if using cookies, you can't leave cors empty
 server.use(express.json());
 
 //ROUTES

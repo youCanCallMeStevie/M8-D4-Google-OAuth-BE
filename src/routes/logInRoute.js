@@ -1,7 +1,9 @@
 const express = require("express");
+const passport = require("passport");
 
 const router = express.Router();
-const { postAuthorController } = require("../controllers/authors");
+const { postAuthorController} = require("../controllers/authors");
+const {  googleRedirectController, refreshTokenController } = require("../controllers/login");
 
 const { login, logout } = require("../controllers/login");
 
@@ -15,5 +17,11 @@ router.post(
 );
 router.post("/login", login);
 router.post("/logout", logout);
+router.get("/refreshToken", refreshTokenController);
+router.get("/googleRedirect", googleRedirectController);
+router.get(
+  "/googleLogin",
+  passport.authenticate("google", { scope: ["profile", "email"] })
+);
 
 module.exports = router;
