@@ -18,7 +18,7 @@ router.post(
 router.post("/login", login);
 router.post("/logout", logout);
 router.get("/refreshToken", refreshTokenController);
-router.get("/googleRedirect", googleRedirectController);
+router.get("/googleRedirect",passport.authenticate("google"), googleRedirectController);
 router.get(
   "/googleLogin",
   passport.authenticate("google", { scope: ["profile", "email"] })

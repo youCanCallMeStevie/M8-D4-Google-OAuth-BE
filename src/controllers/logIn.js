@@ -60,6 +60,7 @@ exports.refreshTokenController= async (req, res, next) => {
 
 exports.googleRedirectController = async (req, res, next) => {
   try {
+    console.log(req.user)
     //setting a cookie and giving it a name
     res.cookie("accessToken", req.user.tokens.accessToken, 
     //providing options, which means the JS code cannot check the content

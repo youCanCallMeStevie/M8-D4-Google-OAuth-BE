@@ -4,6 +4,7 @@ const listEndpoints = require("express-list-endpoints");
 const articlesRoute = require("./src/routes/articleRoute");
 const authorsRoute = require("./src/routes/authorRoute");
 const logInRoute = require("./src/routes/logInRoute");
+const passport = require("passport");
 const {
   notFoundHandler,
   badRequestHandler,
@@ -16,7 +17,7 @@ const oauth = require("./src/auth/oauth"); //import so that the google strategy 
 
 //INITIAL SETUP
 const server = express();
-const port = process.env.PORT || 3006
+const port = process.env.PORT || 4000
 
 //MIDDLEWARES
 
@@ -33,6 +34,7 @@ const corsOptions = {
 };
 
 server.use(cors(corsOptions)); //if using cookies, you can't leave cors empty
+server.use(passport.initialize())
 server.use(express.json());
 
 //ROUTES

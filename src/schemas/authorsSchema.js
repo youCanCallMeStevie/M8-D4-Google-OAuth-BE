@@ -14,15 +14,20 @@ const AuthorSchema = new Schema(
 
     username: {
       type: String,
-      required: true,
+      required: false,
     },
-    password: { type: String, required: true, minlength: 8 },
+    password: { type: String, required: false, minlength: 8 },
     email: {
       type: String,
       required: true,
       trim: true,
       unique: true,
       required: "An email address is required",
+    },
+    refreshTokens: [{ token: { type: String } }],
+    googleId: {
+      type: String,
+      required: false,
     },
   },
   {

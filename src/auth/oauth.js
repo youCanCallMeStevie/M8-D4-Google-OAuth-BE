@@ -11,7 +11,7 @@ passport.use(
       clientSecret: process.env.GOOGLE_SECRET,
       callbackURL: `${process.env.BE_URL}/googleRedirect`,
     },
-    async (request, accessToken, refreshToken, profile, done) => {
+    async function (request, accessToken, refreshToken, profile, done) {
       console.log(profile);
       const newUser = {
         googleId: profile.id,
@@ -37,7 +37,7 @@ passport.use(
           done(null, { user: createdUser, tokens });
         }
       } catch (error) {
-        next(error);
+        done(error);
       }
     }
   )

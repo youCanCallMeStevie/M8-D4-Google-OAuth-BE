@@ -13,8 +13,8 @@ const schemas = {
   authorSchema: Joi.object().keys({
     name: Joi.string().required(),
     surname: Joi.string().required(),
-    username: Joi.string().required(),
-    password: Joi.string().min(8).required(),
+    username: Joi.string(),
+    password: Joi.string().min(8),
     email: Joi.string().required(),
   }),
   reviewSchema: Joi.object().keys({
