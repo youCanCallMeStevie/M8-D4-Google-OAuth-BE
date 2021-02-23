@@ -1,5 +1,4 @@
 const express = require("express");
-const dotenv = require("dotenv");
 const listEndpoints = require("express-list-endpoints");
 const articlesRoute = require("./src/routes/articleRoute");
 const authorsRoute = require("./src/routes/authorRoute");
